@@ -1,0 +1,444 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 多设备对比分析 - Select 组件字体大小调整 */
+.comparison-device-select .ant-select-selection-item {
+  font-size: 13px !important;
+  line-height: 20px !important;
+  padding: 2px 8px !important;
+  height: auto !important;
+}
+
+.comparison-device-select .ant-select-selection-placeholder {
+  font-size: 14px !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #0f172a; /* slate-900 for industrial theme */
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 卡片动画 */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 用户偏好模态框深色主题 */
+.ant-modal .ant-form-item-label > label {
+  color: #e2e8f0 !important;
+}
+
+.ant-modal .ant-form-item-extra {
+  color: #94a3b8 !important;
+}
+
+.ant-modal .ant-input,
+.ant-modal .ant-input-number-input,
+.ant-modal .ant-select-selector {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-modal .ant-input:hover,
+.ant-modal .ant-input-number:hover .ant-input-number-input,
+.ant-modal .ant-select:hover .ant-select-selector {
+  border-color: #64748b !important;
+}
+
+.ant-modal .ant-input:focus,
+.ant-modal .ant-input-number-input:focus,
+.ant-modal .ant-select-focused .ant-select-selector {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.ant-modal .ant-input-number-handler-wrap {
+  background-color: #334155 !important;
+  border-left-color: #475569 !important;
+}
+
+.ant-modal .ant-input-number-handler {
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-modal .ant-input-number-handler:hover {
+  background-color: #475569 !important;
+}
+
+.ant-modal .ant-select-arrow {
+  color: #94a3b8 !important;
+}
+
+/* 全局 Select 下拉框深色主题 */
+.ant-select-selector {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.ant-select-selection-search-input {
+  color: #e2e8f0 !important;
+}
+
+.ant-select-selection-item,
+.ant-select-selection-placeholder {
+  color: #e2e8f0 !important;
+}
+
+.ant-select-selection-placeholder {
+  font-size: 12px !important;
+}
+
+.ant-select:hover .ant-select-selector {
+  border-color: #64748b !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.ant-select-arrow {
+  color: #94a3b8 !important;
+}
+
+.ant-select-clear {
+  background-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+/* 下拉菜单容器 */
+.ant-select-dropdown {
+  background-color: #1e293b !important;
+  border: 1px solid #475569 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 下拉菜单项 */
+.ant-select-item {
+  color: #e2e8f0 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 12px !important;
+}
+
+.ant-select-item-option {
+  color: #e2e8f0 !important;
+  font-size: 12px !important;
+}
+
+.ant-select-item-option-content {
+  color: #e2e8f0 !important;
+  font-size: 12px !important;
+}
+
+/* 确保所有下拉项文字为白色 */
+.ant-select-dropdown .rc-virtual-list-holder-inner > div {
+  color: #e2e8f0 !important;
+}
+
+/* 悬停状态 */
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) .ant-select-item-option-content {
+  color: #e2e8f0 !important;
+}
+
+/* 选中状态 - 与未选中状态保持一致 */
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  font-weight: normal;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) .ant-select-item-option-content {
+  color: #e2e8f0 !important;
+}
+
+/* 选中状态悬停 */
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled):hover {
+  background-color: #334155 !important;
+}
+
+/* 禁用状态 */
+.ant-select-disabled .ant-select-selector {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #64748b !important;
+}
+
+/* 下拉菜单分组标题 */
+.ant-select-item-group {
+  color: #94a3b8 !important;
+  background-color: #0f172a !important;
+}
+
+/* 搜索框 */
+.ant-select-dropdown .ant-select-item-option {
+  padding: 8px 12px;
+  color: #e2e8f0 !important;
+}
+
+/* Badge 组件文字大小 */
+.ant-badge-status-text {
+  font-size: 12px !important;
+}
+
+/* 自定义下拉菜单12px字体 */
+.select-dropdown-12px .ant-select-item,
+.select-dropdown-12px .ant-select-item-option,
+.select-dropdown-12px .ant-select-item-option-content,
+.select-dropdown-12px * {
+  font-size: 12px !important;
+}
+
+/* 强制所有Select下拉项及其子元素文字为白色和12px字体 */
+.ant-select-dropdown * {
+  color: #e2e8f0 !important;
+  font-size: 12px !important;
+}
+
+/* 保持选中项为白色（在蓝色背景上） */
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) *,
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  color: #ffffff !important;
+}
+
+/* 空状态 */
+.ant-select-item-empty {
+  color: #94a3b8 !important;
+}
+
+/* 多选标签 */
+.ant-select-selection-item {
+  background-color: #475569 !important;
+  border-color: #64748b !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-select-selection-item-remove {
+  color: #cbd5e1 !important;
+}
+
+.ant-select-selection-item-remove:hover {
+  color: #f87171 !important;
+}
+
+/* 全局 Input 输入框深色主题 */
+.ant-input,
+.ant-input-number,
+.ant-input-affix-wrapper {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-input::placeholder,
+.ant-input-number-input::placeholder {
+  color: #64748b !important;
+  font-size: 12px !important;
+}
+
+.ant-input:hover,
+.ant-input-number:hover,
+.ant-input-affix-wrapper:hover {
+  border-color: #64748b !important;
+}
+
+.ant-input:focus,
+.ant-input-number-input:focus,
+.ant-input-affix-wrapper-focused {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* TextArea */
+.ant-input-textarea .ant-input {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* 全局 Table 表格深色主题 */
+.ant-table {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #0f172a !important;
+  color: #94a3b8 !important;
+  border-bottom: 1px solid #475569 !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #334155 !important;
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background-color: #1e3a8a !important;
+}
+
+/* 分页器 */
+.ant-pagination-item {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+}
+
+.ant-pagination-item a {
+  color: #e2e8f0 !important;
+}
+
+.ant-pagination-item-active {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+.ant-pagination-item-active a {
+  color: #ffffff !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* 全局 Checkbox 深色主题 */
+.ant-checkbox-inner {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* 全局 Radio 深色主题 */
+.ant-radio-inner {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: #3b82f6 !important;
+}
+
+.ant-radio-inner::after {
+  background-color: #3b82f6 !important;
+}
+
+/* 全局 Switch 深色主题 */
+.ant-switch {
+  background-color: #475569 !important;
+}
+
+.ant-switch-checked {
+  background-color: #3b82f6 !important;
+}
+
+/* 全局 Message 消息提示深色主题 */
+.ant-message-notice-content {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 全局 Tooltip 深色主题 */
+.ant-tooltip-inner {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-tooltip-arrow-content {
+  background-color: #0f172a !important;
+}
+
+/* 全局 Popover 深色主题 */
+.ant-popover-inner {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+.ant-popover-arrow-content {
+  background-color: #1e293b !important;
+}
+
+/* 全局 Dropdown 下拉菜单深色主题 */
+.ant-dropdown-menu {
+  background-color: #1e293b !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.ant-dropdown-menu-item {
+  color: #e2e8f0 !important;
+  font-size: 13px !important;
+}
+
+.ant-dropdown-menu-item:hover {
+  background-color: #334155 !important;
+}
+
+.ant-dropdown-menu-item-selected {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* 全局 Modal 确认对话框深色主题 */
+.ant-modal-confirm .ant-modal-confirm-title {
+  color: #e2e8f0 !important;
+}
+
+.ant-modal-confirm .ant-modal-confirm-content {
+  color: #cbd5e1 !important;
+}

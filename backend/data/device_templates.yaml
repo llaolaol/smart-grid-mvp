@@ -1,0 +1,128 @@
+# 设备模板配置
+# 定义不同类型变压器的标准参数
+
+device_types:
+  main_transformer:
+    name: "主变压器"
+    capacity_range: [100, 240]  # MVA
+    voltage_levels:
+      - "220/110/35kV"
+      - "220/110/10kV"
+      - "500/220/110kV"
+    thermal_params:
+      k1: 55          # 油温上升系数
+      k2: 23          # 热点温升系数
+      n1: 2.0         # 油温指数
+      n2: 1.6         # 热点指数
+      rated_temp: 98  # 额定温度
+      hotspot_limit: 98  # 热点限值
+    aging_params:
+      initial_dp: 1000        # 初始聚合度
+      failure_dp: 200         # 失效聚合度
+      reference_temp: 98      # 参考温度
+      activation_energy: 111  # 活化能 kJ/mol
+
+  distribution_transformer:
+    name: "配电变压器"
+    capacity_range: [1, 20]  # MVA
+    voltage_levels:
+      - "110/35/10kV"
+      - "35/10/0.4kV"
+      - "10/0.4kV"
+    thermal_params:
+      k1: 50
+      k2: 20
+      n1: 2.0
+      n2: 1.6
+      rated_temp: 95
+      hotspot_limit: 95
+    aging_params:
+      initial_dp: 1000
+      failure_dp: 200
+      reference_temp: 95
+      activation_energy: 111
+
+# 设备实例模板
+device_instances:
+  - id: "T001"
+    name: "1号主变"
+    type: "main_transformer"
+    capacity: 180
+    voltage: "220/110/35kV"
+    commissioning_year: 2014
+    manufacturer: "特变电工"
+    location: "220kV中心变电站"
+
+  - id: "T002"
+    name: "2号主变"
+    type: "main_transformer"
+    capacity: 180
+    voltage: "220/110/35kV"
+    commissioning_year: 2019
+    manufacturer: "保定天威"
+    location: "220kV中心变电站"
+
+  - id: "D001"
+    name: "1号配变"
+    type: "distribution_transformer"
+    capacity: 10
+    voltage: "110/35/10kV"
+    commissioning_year: 2016
+    manufacturer: "西电集团"
+    location: "110kV东区变电站"
+
+  - id: "D002"
+    name: "2号配变"
+    type: "distribution_transformer"
+    capacity: 10
+    voltage: "110/35/10kV"
+    commissioning_year: 2020
+    manufacturer: "西电集团"
+    location: "110kV东区变电站"
+
+  - id: "D003"
+    name: "3号配变"
+    type: "distribution_transformer"
+    capacity: 6.3
+    voltage: "35/10/0.4kV"
+    commissioning_year: 2012
+    manufacturer: "金风科技"
+    location: "35kV南区变电站"
+
+# 运行工况模板
+operating_conditions:
+  normal:
+    name: "正常运行"
+    load_percent: 85
+    ambient_temp: 25
+    cooling_factor: 1.0
+
+  summer_peak:
+    name: "夏季高峰"
+    load_percent: 95
+    ambient_temp: 38
+    cooling_factor: 1.0
+
+  winter_peak:
+    name: "冬季高峰"
+    load_percent: 90
+    ambient_temp: -5
+    cooling_factor: 1.0
+
+  overload:
+    name: "过载运行"
+    load_percent: 120
+    ambient_temp: 30
+    cooling_factor: 1.0
+
+  cooling_fault:
+    name: "冷却故障"
+    load_percent: 85
+    ambient_temp: 25
+    cooling_factor: 0.5
+
+  light_load:
+    name: "轻载运行"
+    load_percent: 40
+    ambient_temp: 20
+    cooling_factor: 1.0

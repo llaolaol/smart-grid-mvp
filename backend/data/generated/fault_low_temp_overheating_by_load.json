@@ -1,0 +1,104 @@
+[
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647437",
+    "dga": {
+      "H2": 97.8,
+      "CH4": 79.3,
+      "C2H6": 28.4,
+      "C2H4": 28.8,
+      "C2H2": 2.0,
+      "CO": 403.5,
+      "CO2": 4109.0
+    },
+    "thermal": {
+      "load_percent": 40,
+      "ambient_temp": 20,
+      "oil_temp": 29.7,
+      "hotspot_temp": 35.6,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 891.6,
+      "aging_rate": 0.03,
+      "remaining_life_years": 13190.0
+    },
+    "operating_condition": {
+      "name": "轻载运行",
+      "load_percent": 40,
+      "ambient_temp": 20
+    },
+    "fault_type": "low_temp_overheating",
+    "severity": 1
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647455",
+    "dga": {
+      "H2": 95.2,
+      "CH4": 99.6,
+      "C2H6": 50.9,
+      "C2H4": 74.4,
+      "C2H2": 1.8,
+      "CO": 544.4,
+      "CO2": 3221.1
+    },
+    "thermal": {
+      "load_percent": 85,
+      "ambient_temp": 25,
+      "oil_temp": 65.6,
+      "hotspot_temp": 84.0,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 397.0,
+      "aging_rate": 0.165,
+      "remaining_life_years": 10.8
+    },
+    "operating_condition": {
+      "name": "正常运行",
+      "load_percent": 85,
+      "ambient_temp": 25
+    },
+    "fault_type": "low_temp_overheating",
+    "severity": 1
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647469",
+    "dga": {
+      "H2": 70.4,
+      "CH4": 50.0,
+      "C2H6": 37.0,
+      "C2H4": 24.0,
+      "C2H2": 1.4,
+      "CO": 523.8,
+      "CO2": 3288.7
+    },
+    "thermal": {
+      "load_percent": 120,
+      "ambient_temp": 30,
+      "oil_temp": 110.1,
+      "hotspot_temp": 141.5,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 200,
+      "aging_rate": 0.469,
+      "remaining_life_years": 0
+    },
+    "operating_condition": {
+      "name": "过载运行",
+      "load_percent": 120,
+      "ambient_temp": 30
+    },
+    "fault_type": "low_temp_overheating",
+    "severity": 1
+  }
+]

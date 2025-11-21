@@ -1,0 +1,34 @@
+{
+  "device_id": "T001",
+  "device_name": "1号主变",
+  "timestamp": "2025-11-14T13:18:57.046105",
+  "dga": {
+    "H2": 696.1,
+    "CH4": 50.7,
+    "C2H6": 30.6,
+    "C2H4": 133.7,
+    "C2H2": 109.9,
+    "CO": 942.5,
+    "CO2": 3184.4
+  },
+  "thermal": {
+    "load_percent": 120,
+    "ambient_temp": 30,
+    "oil_temp": 111.5,
+    "hotspot_temp": 143.7,
+    "cooling_factor": 1.0
+  },
+  "aging": {
+    "device_age": 10,
+    "current_dp": 200,
+    "aging_rate": 0.484,
+    "remaining_life_years": 0
+  },
+  "operating_condition": {
+    "name": "过载运行",
+    "load_percent": 120,
+    "ambient_temp": 30
+  },
+  "fault_type": "high_energy_discharge",
+  "severity": 3
+}

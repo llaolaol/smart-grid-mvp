@@ -1,0 +1,104 @@
+[
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.646034",
+    "dga": {
+      "H2": 90.6,
+      "CH4": 26.2,
+      "C2H6": 27.9,
+      "C2H4": 29.0,
+      "C2H2": 2.3,
+      "CO": 256.3,
+      "CO2": 3509.9
+    },
+    "thermal": {
+      "load_percent": 40,
+      "ambient_temp": 20,
+      "oil_temp": 28.8,
+      "hotspot_temp": 34.1,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 900.5,
+      "aging_rate": 0.027,
+      "remaining_life_years": 16500.7
+    },
+    "operating_condition": {
+      "name": "轻载运行",
+      "load_percent": 40,
+      "ambient_temp": 20
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.646054",
+    "dga": {
+      "H2": 108.2,
+      "CH4": 34.5,
+      "C2H6": 29.9,
+      "C2H4": 32.0,
+      "C2H2": 0.9,
+      "CO": 426.4,
+      "CO2": 2600.6
+    },
+    "thermal": {
+      "load_percent": 85,
+      "ambient_temp": 25,
+      "oil_temp": 64.7,
+      "hotspot_temp": 82.5,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 418.4,
+      "aging_rate": 0.159,
+      "remaining_life_years": 14.0
+    },
+    "operating_condition": {
+      "name": "正常运行",
+      "load_percent": 85,
+      "ambient_temp": 25
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.646069",
+    "dga": {
+      "H2": 52.9,
+      "CH4": 20.5,
+      "C2H6": 21.4,
+      "C2H4": 22.4,
+      "C2H2": 0.4,
+      "CO": 375.1,
+      "CO2": 3758.6
+    },
+    "thermal": {
+      "load_percent": 120,
+      "ambient_temp": 30,
+      "oil_temp": 109.2,
+      "hotspot_temp": 140.0,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 200,
+      "aging_rate": 0.459,
+      "remaining_life_years": 0
+    },
+    "operating_condition": {
+      "name": "过载运行",
+      "load_percent": 120,
+      "ambient_temp": 30
+    },
+    "fault_type": "normal",
+    "severity": 0
+  }
+]

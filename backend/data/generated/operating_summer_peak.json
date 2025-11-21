@@ -1,0 +1,172 @@
+[
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.641920",
+    "dga": {
+      "H2": 51.5,
+      "CH4": 21.4,
+      "C2H6": 9.4,
+      "C2H4": 14.0,
+      "C2H2": 1.9,
+      "CO": 303.1,
+      "CO2": 2921.6
+    },
+    "thermal": {
+      "load_percent": 95,
+      "ambient_temp": 38,
+      "oil_temp": 87.6,
+      "hotspot_temp": 108.8,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 200,
+      "aging_rate": 0.277,
+      "remaining_life_years": 0
+    },
+    "operating_condition": {
+      "name": "夏季高峰",
+      "load_percent": 95,
+      "ambient_temp": 38
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "T002",
+    "device_name": "2号主变",
+    "timestamp": "2025-11-14T13:19:16.641942",
+    "dga": {
+      "H2": 108.0,
+      "CH4": 23.0,
+      "C2H6": 30.1,
+      "C2H4": 33.5,
+      "C2H2": 0.2,
+      "CO": 209.5,
+      "CO2": 2783.3
+    },
+    "thermal": {
+      "load_percent": 95,
+      "ambient_temp": 38,
+      "oil_temp": 87.6,
+      "hotspot_temp": 108.8,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 5,
+      "current_dp": 578.0,
+      "aging_rate": 0.231,
+      "remaining_life_years": 1.8
+    },
+    "operating_condition": {
+      "name": "夏季高峰",
+      "load_percent": 95,
+      "ambient_temp": 38
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "D001",
+    "device_name": "1号配变",
+    "timestamp": "2025-11-14T13:19:16.641957",
+    "dga": {
+      "H2": 79.7,
+      "CH4": 22.4,
+      "C2H6": 13.1,
+      "C2H4": 44.2,
+      "C2H2": 0.4,
+      "CO": 376.9,
+      "CO2": 3374.2
+    },
+    "thermal": {
+      "load_percent": 95,
+      "ambient_temp": 38,
+      "oil_temp": 83.1,
+      "hotspot_temp": 101.5,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 8,
+      "current_dp": 341.6,
+      "aging_rate": 0.225,
+      "remaining_life_years": 1.3
+    },
+    "operating_condition": {
+      "name": "夏季高峰",
+      "load_percent": 95,
+      "ambient_temp": 38
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "D002",
+    "device_name": "2号配变",
+    "timestamp": "2025-11-14T13:19:16.641970",
+    "dga": {
+      "H2": 51.3,
+      "CH4": 10.8,
+      "C2H6": 21.1,
+      "C2H4": 35.0,
+      "C2H2": 0.8,
+      "CO": 257.1,
+      "CO2": 2393.8
+    },
+    "thermal": {
+      "load_percent": 95,
+      "ambient_temp": 38,
+      "oil_temp": 83.1,
+      "hotspot_temp": 101.5,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 4,
+      "current_dp": 717.8,
+      "aging_rate": 0.193,
+      "remaining_life_years": 4.9
+    },
+    "operating_condition": {
+      "name": "夏季高峰",
+      "load_percent": 95,
+      "ambient_temp": 38
+    },
+    "fault_type": "normal",
+    "severity": 0
+  },
+  {
+    "device_id": "D003",
+    "device_name": "3号配变",
+    "timestamp": "2025-11-14T13:19:16.641983",
+    "dga": {
+      "H2": 104.0,
+      "CH4": 20.8,
+      "C2H6": 7.2,
+      "C2H4": 35.3,
+      "C2H2": 2.5,
+      "CO": 482.2,
+      "CO2": 2847.7
+    },
+    "thermal": {
+      "load_percent": 95,
+      "ambient_temp": 38,
+      "oil_temp": 83.1,
+      "hotspot_temp": 101.5,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 12,
+      "current_dp": 200,
+      "aging_rate": 0.258,
+      "remaining_life_years": 0
+    },
+    "operating_condition": {
+      "name": "夏季高峰",
+      "load_percent": 95,
+      "ambient_temp": 38
+    },
+    "fault_type": "normal",
+    "severity": 0
+  }
+]

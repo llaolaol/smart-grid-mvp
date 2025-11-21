@@ -1,0 +1,134 @@
+# MVP配置文件
+
+# OpenAI配置
+openai:
+  api_key: "your-api-key-here"  # 替换为你的API Key
+  model: "gpt-4-turbo-preview"   # 可选: gpt-4, gpt-3.5-turbo
+  temperature: 0
+  max_tokens: 2000
+
+# 数据库配置
+database:
+  type: "sqlite"
+  path: "data/mvp.db"
+
+# 模型配置（用于模块化升级）
+models:
+  dga_diagnoser:
+    type: "rule_based"  # 可选: rule_based, ml, ensemble
+    enabled: true
+
+  thermal_model:
+    type: "simplified"  # 可选: simplified, ml, pinn, fem
+    enabled: true
+
+    # 简化模型参数（基于IEC 60076）
+    params:
+      rated_capacity_mva: 180
+      rated_voltage_kv: 220
+      k1: 55  # 油温上升系数
+      k2: 23  # 热点温升系数
+      n1: 2.0  # 油温指数
+      n2: 1.6  # 热点指数
+
+  aging_model:
+    type: "arrhenius"  # 可选: arrhenius, ml
+    enabled: true
+
+    # Arrhenius参数
+    params:
+      activation_energy: 111000  # J/mol
+      reference_temp: 110  # °C (383K)
+      initial_dp: 1000  # 聚合度
+      failure_dp: 200
+
+  simulator:
+    type: "coupled"  # 耦合仿真
+    enabled: true
+    time_step_hours: 1
+    max_days: 30
+
+# 标准限值配置
+standards:
+  dga_limits:  # IEC 60599
+    H2:
+      attention: 150
+      alarm: 1000
+    CH4:
+      attention: 120
+      alarm: 400
+    C2H2:
+      attention: 5
+      alarm: 50
+    C2H4:
+      attention: 60
+      alarm: 200
+    C2H6:
+      attention: 65
+      alarm: 150
+    CO:
+      attention: 540
+      alarm: 1400
+    CO2:
+      attention: 7000
+      alarm: 15000
+
+  temperature_limits:  # IEC 60076
+    oil_top: 105  # °C
+    hotspot: 118  # °C
+    ambient_max: 40
+
+# 演示配置
+demo:
+  default_device:
+    id: "Transformer_1"
+    name: "1号主变"
+    rated_capacity: 180  # MVA
+    rated_voltage: 220   # kV
+    manufacture_date: "2015-06-01"
+    install_date: "2015-08-15"
+
+  # 预设故障场景
+  scenarios:
+    - name: "正常运行"
+      load: 75
+      temp_amb: 25
+      defect_factor: 0.0
+
+    - name: "高负载"
+      load: 95
+      temp_amb: 35
+      defect_factor: 0.2
+
+    - name: "高能放电缺陷"
+      load: 85
+      temp_amb: 25
+      defect_factor: 0.8
+      dga:
+        H2: 145
+        CH4: 32
+        C2H6: 8
+        C2H4: 45
+        C2H2: 78
+        CO: 420
+        CO2: 3200
+
+# 日志配置
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan> - <level>{message}</level>"
+  file: "logs/app.log"
+  rotation: "10 MB"
+
+# API配置
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true  # 开发模式
+
+# 前端配置
+frontend:
+  title: "智能电网运维平台 MVP"
+  page_icon: "⚡"
+  layout: "wide"
+  port: 8501

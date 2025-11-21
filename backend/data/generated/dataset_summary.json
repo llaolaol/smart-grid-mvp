@@ -1,0 +1,38 @@
+{
+  "generation_date": "2025-11-14T13:19:16.679181",
+  "total_devices": 5,
+  "device_types": [
+    "main_transformer",
+    "distribution_transformer"
+  ],
+  "fault_types": [
+    "normal",
+    "partial_discharge",
+    "low_energy_discharge",
+    "high_energy_discharge",
+    "low_temp_overheating",
+    "medium_temp_overheating",
+    "high_temp_overheating"
+  ],
+  "evolution_types": [
+    "gradual_discharge",
+    "gradual_overheating",
+    "sudden_fault"
+  ],
+  "operating_conditions": [
+    "normal",
+    "summer_peak",
+    "winter_peak",
+    "overload",
+    "cooling_fault",
+    "light_load"
+  ],
+  "datasets": {
+    "timeseries_evolution": "3 * 2 = 6 files",
+    "operating_conditions": "6 files",
+    "multi_device_scenarios": "3 files",
+    "fault_load_combinations": "7 files",
+    "long_term_history": "1 file (365 days)"
+  },
+  "total_files": 30
+}

@@ -1,0 +1,104 @@
+[
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647070",
+    "dga": {
+      "H2": 790.6,
+      "CH4": 86.6,
+      "C2H6": 21.8,
+      "C2H4": 138.3,
+      "C2H2": 209.4,
+      "CO": 659.1,
+      "CO2": 5265.2
+    },
+    "thermal": {
+      "load_percent": 40,
+      "ambient_temp": 20,
+      "oil_temp": 31.1,
+      "hotspot_temp": 37.9,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 877.4,
+      "aging_rate": 0.034,
+      "remaining_life_years": 9449.7
+    },
+    "operating_condition": {
+      "name": "轻载运行",
+      "load_percent": 40,
+      "ambient_temp": 20
+    },
+    "fault_type": "high_energy_discharge",
+    "severity": 3
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647088",
+    "dga": {
+      "H2": 567.7,
+      "CH4": 52.2,
+      "C2H6": 38.5,
+      "C2H4": 98.8,
+      "C2H2": 186.8,
+      "CO": 783.8,
+      "CO2": 5425.4
+    },
+    "thermal": {
+      "load_percent": 85,
+      "ambient_temp": 25,
+      "oil_temp": 67.0,
+      "hotspot_temp": 86.2,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 364.3,
+      "aging_rate": 0.174,
+      "remaining_life_years": 7.1
+    },
+    "operating_condition": {
+      "name": "正常运行",
+      "load_percent": 85,
+      "ambient_temp": 25
+    },
+    "fault_type": "high_energy_discharge",
+    "severity": 3
+  },
+  {
+    "device_id": "T001",
+    "device_name": "1号主变",
+    "timestamp": "2025-11-14T13:19:16.647102",
+    "dga": {
+      "H2": 375.5,
+      "CH4": 100.9,
+      "C2H6": 28.1,
+      "C2H4": 113.5,
+      "C2H2": 104.0,
+      "CO": 511.6,
+      "CO2": 2956.2
+    },
+    "thermal": {
+      "load_percent": 120,
+      "ambient_temp": 30,
+      "oil_temp": 111.5,
+      "hotspot_temp": 143.7,
+      "cooling_factor": 1.0
+    },
+    "aging": {
+      "device_age": 10,
+      "current_dp": 200,
+      "aging_rate": 0.484,
+      "remaining_life_years": 0
+    },
+    "operating_condition": {
+      "name": "过载运行",
+      "load_percent": 120,
+      "ambient_temp": 30
+    },
+    "fault_type": "high_energy_discharge",
+    "severity": 3
+  }
+]
