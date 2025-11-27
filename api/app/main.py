@@ -14,7 +14,7 @@ backend_path = Path(__file__).parent.parent.parent / "backend"
 sys.path.insert(0, str(backend_path))
 
 from app.core.config import settings
-from app.api.v1 import diagnosis, simulation, devices, reports, ai, data
+from app.api.v1 import diagnosis, simulation, devices, reports, ai, data, history
 
 
 # Create FastAPI app
@@ -93,6 +93,12 @@ app.include_router(
     data.router,
     prefix=f"{settings.API_V1_PREFIX}/data",
     tags=["Data Upload"]
+)
+
+app.include_router(
+    history.router,
+    prefix=f"{settings.API_V1_PREFIX}/history",
+    tags=["History"]
 )
 
 

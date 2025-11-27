@@ -50,6 +50,7 @@ export interface Device {
   operating_condition: OperatingCondition;
   manufacturer?: string;
   installation_date?: string;
+  timestamp?: string;  // 数据时间戳 (ISO 8601格式)
 }
 
 // 设备列表响应
@@ -180,3 +181,6 @@ export const SeverityMap: Record<number, { text: string; color: string }> = {
   2: { text: '异常', color: 'error' },
   3: { text: '严重', color: 'error' },
 };
+
+// 导出历史数据相关类型
+export * from './history';

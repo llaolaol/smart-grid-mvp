@@ -64,6 +64,7 @@ class Device(BaseModel):
     operating_condition: OperatingCondition
     manufacturer: Optional[str] = None
     installation_date: Optional[str] = None
+    timestamp: Optional[str] = Field(None, description="数据时间戳 (ISO 8601格式)")
 
 
 class DeviceListResponse(BaseModel):
