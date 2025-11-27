@@ -154,11 +154,19 @@ class HistoryService:
         # 先尝试完整路径匹配
         field_name = field_mapping.get(metric_path)
         if field_name:
-            return getattr(snapshot, field_name, None)
+            value = getattr(snapshot, field_name, None)
+            # 只返回数值类型，过滤掉字符串等非数值类型
+            if isinstance(value, (int, float)):
+                return value
+            return None
 
         # 如果是单层路径（无点号），直接获取
         if len(parts) == 1:
-            return getattr(snapshot, metric_path, None)
+            value = getattr(snapshot, metric_path, None)
+            # 只返回数值类型
+            if isinstance(value, (int, float)):
+                return value
+            return None
 
         # 尝试获取嵌套属性（未来扩展）
         return None
@@ -194,11 +202,14 @@ class HistoryService:
                    raw_data.get("equip_no") or \
                    raw_data.get("pms_device_code")
 
+        # 移除已提取的字段，避免重复参数
+        clean_data = {k: v for k, v in raw_data.items() if k not in ["timestamp", "device_id"]}
+
         # 构建快照对象（所有字段都是 Optional，直接传入原始数据）
         snapshot = DeviceHistorySnapshot(
             timestamp=timestamp,
             device_id=device_id,
-            **raw_data  # 直接展开所有字段
+            **clean_data  # 展开其他字段
         )
 
         return snapshot
