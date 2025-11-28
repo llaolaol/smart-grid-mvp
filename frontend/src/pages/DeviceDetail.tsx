@@ -11,6 +11,7 @@ import {
   Row,
   Col,
   Badge,
+  Tabs,
 } from 'antd';
 import { ArrowLeftOutlined, FileTextOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
@@ -24,6 +25,9 @@ import {
 } from '@/utils/format';
 import { LoadingSkeleton } from '@/components/LoadingSkeleton';
 import { EmptyState } from '@/components/EmptyState';
+import { TimeRangePicker } from '@/components/TimeRangePicker';
+import { TrendChart } from '@/components/TrendChart';
+import type { TimeRangeQuery, DeviceHistorySnapshot } from '@/types';
 
 const { Title, Text } = Typography;
 
@@ -37,6 +41,13 @@ const DeviceDetail = () => {
   const [device, setDevice] = useState<Device | null>(null);
   const [diagnosis, setDiagnosis] = useState<DiagnosisResult | null>(null);
   const [reportLoading, setReportLoading] = useState(false);
+
+  // 历史趋势状态管理
+  const [timeRange, setTimeRange] = useState<TimeRangeQuery>({
+    start_time: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date().toISOString(),
+  });
+  const [playbackSnapshot, setPlaybackSnapshot] = useState<DeviceHistorySnapshot | null>(null);
 
   useEffect(() => {
     const loadDevice = async () => {
@@ -308,6 +319,74 @@ const DeviceDetail = () => {
             </Descriptions>
           </Card>
         )}
+
+        <Card>
+          <Tabs
+            defaultActiveKey="trend"
+            items={[
+              {
+                key: 'trend',
+                label: '历史趋势',
+                children: (
+                  <Space direction="vertical" size="large" style={{ width: '100%' }}>
+                    <div style={{ marginBottom: 16 }}>
+                      <TimeRangePicker
+                        value={timeRange}
+                        onChange={setTimeRange}
+                        showTime={true}
+                        placeholder={['开始时间', '结束时间']}
+                      />
+                    </div>
+
+                    <Row gutter={[16, 16]}>
+                      <Col span={24}>
+                        <TrendChart
+                          deviceId={device.device_id}
+                          metrics={['dga.H2', 'dga.CH4', 'dga.C2H2', 'dga.C2H4']}
+                          timeRange={timeRange}
+                          title="DGA气体浓度趋势"
+                          height={400}
+                        />
+                      </Col>
+                    </Row>
+
+                    <Row gutter={[16, 16]}>
+                      <Col span={12}>
+                        <TrendChart
+                          deviceId={device.device_id}
+                          metrics={['thermal.oil_temp', 'thermal.hotspot_temp', 'thermal.ambient_temp']}
+                          timeRange={timeRange}
+                          title="温度趋势"
+                          height={350}
+                        />
+                      </Col>
+                      <Col span={12}>
+                        <TrendChart
+                          deviceId={device.device_id}
+                          metrics={['aging.current_dp', 'aging.aging_rate']}
+                          timeRange={timeRange}
+                          title="老化趋势"
+                          height={350}
+                        />
+                      </Col>
+                    </Row>
+                  </Space>
+                ),
+              },
+              {
+                key: 'playback',
+                label: '数据回放',
+                children: (
+                  <EmptyState
+                    type="info"
+                    title="功能开发中"
+                    description="数据回放功能将在阶段4实现，敬请期待"
+                  />
+                ),
+              },
+            ]}
+          />
+        </Card>
       </Space>
     </div>
   );
