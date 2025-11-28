@@ -7,17 +7,38 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from datetime import datetime
 import pandas as pd
+from backend.data.csv_parsers import get_parser
+
+
+# 设备到CSV文件的映射配置
+DEVICE_CSV_MAPPING = {
+    "T001": {
+        "csv_file": "simulated_oil_chromatography_data.csv",
+        "parser_type": "oil",
+        "device_name": "1号主变",
+        "device_id": "12M00000159733143",  # CSV中的设备编号
+    },
+    # 专门用于 CSV Mock 数据测试的设备 ID
+    "T001_OIL_CSV": {
+        "csv_file": "simulated_oil_chromatography_data.csv",
+        "parser_type": "oil",
+        "device_name": "1号主变（油色谱CSV数据）",
+        "device_id": "12M00000159733143",
+    },
+    # TODO: 后续添加 T002 (机控数据), T003 (智巡数据)
+}
 
 
 class DataLoader:
     """数据加载器 - 统一接口访问生成的数据集"""
 
-    def __init__(self, data_dir: Optional[str] = None):
+    def __init__(self, data_dir: Optional[str] = None, mock_csv_dir: Optional[str] = None):
         """
         初始化数据加载器
 
         Args:
             data_dir: 数据目录路径，默认为 backend/data/generated/
+            mock_csv_dir: Mock CSV数据目录，默认为项目根目录的 data_pic/
         """
         if data_dir is None:
             current_dir = Path(__file__).parent
@@ -27,6 +48,14 @@ class DataLoader:
 
         if not self.data_dir.exists():
             raise FileNotFoundError(f"数据目录不存在: {self.data_dir}")
+
+        # 配置 Mock CSV 数据目录
+        if mock_csv_dir is None:
+            # 默认指向项目根目录的 data_pic/
+            project_root = Path(__file__).parent.parent.parent
+            self.mock_csv_dir = project_root / "data_pic"
+        else:
+            self.mock_csv_dir = Path(mock_csv_dir)
 
     def load_device_snapshot(self, device_id: str, fault_type: str = "normal",
                             operating_condition: str = "normal") -> Dict:
@@ -128,7 +157,11 @@ class DataLoader:
         加载历史数据文件
 
         支持加载指定设备的历史数据，或加载所有历史数据文件。
-        【占位符实现】当前从 timeseries 文件读取，未来替换为宽表数据源。
+
+        数据加载优先级:
+        1. 优先从 timeseries JSON 文件加载（generated/ 目录）
+        2. 如果JSON不存在，尝试从 CSV Mock 数据加载（data_pic/ 目录）
+        3. 如果都不存在，抛出 FileNotFoundError
 
         Args:
             device_id: 设备ID（可选），如果不指定则加载所有设备
@@ -151,8 +184,19 @@ class DataLoader:
                 except FileNotFoundError:
                     continue
 
+            # 如果没有找到timeseries数据，尝试从CSV加载
             if not all_data:
-                raise FileNotFoundError(f"设备 {device_id} 的历史数据不存在")
+                try:
+                    csv_data = self.load_mock_history_csv(device_id)
+                    all_data.extend(csv_data)
+                except FileNotFoundError:
+                    pass  # CSV也不存在，继续抛出错误
+
+            if not all_data:
+                raise FileNotFoundError(
+                    f"设备 {device_id} 的历史数据不存在\n"
+                    f"未找到 timeseries JSON 文件，也未配置 CSV Mock 数据"
+                )
 
             return all_data
         else:
@@ -250,6 +294,57 @@ class DataLoader:
             filtered.append(item)
 
         return filtered
+
+    def load_mock_history_csv(self, device_id: str) -> List[Dict]:
+        """
+        从CSV Mock数据加载设备历史数据
+
+        支持三类数据源:
+        - 油色谱数据 (T001)
+        - 机控数据 (T002, 待实现)
+        - 智巡数据 (T003, 待实现)
+
+        Args:
+            device_id: 设备ID (如 "T001", "T002", "T003")
+
+        Returns:
+            历史数据列表 (统一的 DeviceHistorySnapshot 格式)
+
+        Raises:
+            FileNotFoundError: 设备没有对应的CSV映射或文件不存在
+        """
+        # 检查设备是否有CSV映射
+        if device_id not in DEVICE_CSV_MAPPING:
+            raise FileNotFoundError(
+                f"设备 {device_id} 没有配置CSV数据源映射，"
+                f"可用设备: {list(DEVICE_CSV_MAPPING.keys())}"
+            )
+
+        mapping = DEVICE_CSV_MAPPING[device_id]
+        csv_path = self.mock_csv_dir / mapping["csv_file"]
+
+        # 检查CSV文件是否存在
+        if not csv_path.exists():
+            raise FileNotFoundError(
+                f"CSV文件不存在: {csv_path}\n"
+                f"请确认 {self.mock_csv_dir} 目录下有 {mapping['csv_file']}"
+            )
+
+        # 使用解析器加载CSV数据
+        parser = get_parser(csv_path, mapping["parser_type"])
+        raw_records = parser.parse()
+
+        # 将CSV中的设备编号映射到系统设备ID
+        for record in raw_records:
+            # 保留原始设备编号作为 equip_no
+            record["original_device_id"] = record.get("device_id") or record.get("equip_no")
+            # 统一设置为系统设备ID
+            record["device_id"] = device_id
+            # 设置设备名称
+            if not record.get("device_name"):
+                record["device_name"] = mapping["device_name"]
+
+        return raw_records
 
     def list_available_devices(self) -> List[str]:
         """

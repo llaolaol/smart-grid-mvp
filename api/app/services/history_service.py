@@ -244,28 +244,21 @@ class HistoryService:
         Returns:
             HistoryResponse 对象
         """
-        # 【占位符】从 JSON 文件读取时序数据
+        # 【占位符】从 JSON 或 CSV 文件读取历史数据
         try:
-            # 尝试加载不同演化类型的时序数据
-            evolution_types = ["gradual_discharge", "gradual_overheating", "sudden_fault"]
-            raw_data = []
-
-            for evolution_type in evolution_types:
-                try:
-                    data = self.data_loader.load_timeseries(device_id, evolution_type)
-                    raw_data.extend(data)
-                except FileNotFoundError:
-                    continue
+            # 使用 load_history() 方法，支持 timeseries JSON 和 CSV Mock 数据回退
+            raw_data = self.data_loader.load_history(device_id)
 
             if not raw_data:
-                # 如果没有时序数据，尝试从场景数据生成单点快照
+                # 如果没有历史数据，尝试从场景数据生成单点快照
                 device_data = self.data_loader.get_device_by_id(device_id, "all_normal")
                 if device_data:
                     device_data["timestamp"] = datetime.now().isoformat()
                     raw_data = [device_data]
 
         except FileNotFoundError:
-            raise FileNotFoundError(f"设备 {device_id} 的历史数据不存在")
+            # load_history 未找到数据，返回空响应而不是抛出异常
+            raw_data = []
 
         # 转换为快照列表
         snapshots = [self._convert_to_snapshot(item) for item in raw_data]

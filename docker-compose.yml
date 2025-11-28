@@ -16,6 +16,7 @@ services:
     volumes:
       - ./backend:/app/backend
       - ./data:/app/data
+      - ./data_pic:/app/data_pic
       - ./reports:/app/reports
     networks:
       - smart-grid-network
