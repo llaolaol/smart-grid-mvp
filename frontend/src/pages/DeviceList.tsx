@@ -224,7 +224,13 @@ const DeviceList = () => {
             {loading ? (
               <LoadingSkeleton type="table" />
             ) : devices.length > 0 ? (
-              <Card>
+              <Card
+                style={{
+                  background: '#0f172a',
+                  border: '1px solid #334155',
+                }}
+                bodyStyle={{ padding: 0 }}
+              >
                 <Table
                   columns={columns}
                   dataSource={devices}

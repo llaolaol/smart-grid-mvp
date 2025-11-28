@@ -202,14 +202,37 @@ class HistoryService:
                    raw_data.get("equip_no") or \
                    raw_data.get("pms_device_code")
 
-        # 移除已提取的字段，避免重复参数
-        clean_data = {k: v for k, v in raw_data.items() if k not in ["timestamp", "device_id"]}
+        # 展开嵌套结构（DGA, thermal, aging, operating_condition）
+        flat_data = {}
 
-        # 构建快照对象（所有字段都是 Optional，直接传入原始数据）
+        # 处理嵌套字段
+        if "dga" in raw_data and isinstance(raw_data["dga"], dict):
+            for key, value in raw_data["dga"].items():
+                flat_data[key.lower()] = value  # H2 -> h2, CH4 -> ch4
+
+        if "thermal" in raw_data and isinstance(raw_data["thermal"], dict):
+            for key, value in raw_data["thermal"].items():
+                flat_data[key] = value
+
+        if "aging" in raw_data and isinstance(raw_data["aging"], dict):
+            for key, value in raw_data["aging"].items():
+                flat_data[key] = value
+
+        if "operating_condition" in raw_data and isinstance(raw_data["operating_condition"], dict):
+            for key, value in raw_data["operating_condition"].items():
+                flat_data[key] = value
+
+        # 添加其他顶级字段（跳过已处理的嵌套字段和timestamp/device_id）
+        skip_keys = ["timestamp", "device_id", "dga", "thermal", "aging", "operating_condition"]
+        for key, value in raw_data.items():
+            if key not in skip_keys:
+                flat_data[key] = value
+
+        # 构建快照对象
         snapshot = DeviceHistorySnapshot(
             timestamp=timestamp,
             device_id=device_id,
-            **clean_data  # 展开其他字段
+            **flat_data
         )
 
         return snapshot
