@@ -180,6 +180,7 @@ const DeviceList = () => {
           onClick={() =>
             navigate(`/devices/${selectedScenario}/${record.device_id}`)
           }
+          className="device-action-link"
         >
           查看详情
         </a>
@@ -191,7 +192,7 @@ const DeviceList = () => {
     <div>
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Title level={3} style={{ margin: 0 }}>
+          <Title level={3} style={{ margin: 0, color: '#f1f5f9' }}>
             设备监控
           </Title>
           <Space>
@@ -204,7 +205,7 @@ const DeviceList = () => {
             >
               批量生成报告
             </Button>
-            <span>场景选择：</span>
+            <span style={{ color: '#e2e8f0' }}>场景选择：</span>
             <Select
               value={selectedScenario}
               onChange={setSelectedScenario}
