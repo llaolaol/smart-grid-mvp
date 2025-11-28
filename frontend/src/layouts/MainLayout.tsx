@@ -21,7 +21,8 @@ import {
   Camera,
   AlertTriangle,
   Bot,
-  Info
+  Info,
+  List
 } from 'lucide-react';
 import DataUploadModal from '../components/DataUploadModal';
 import UserPreferencesModal from '../components/UserPreferencesModal';
@@ -175,6 +176,13 @@ const MainLayout = () => {
         {/* 快速操作工具栏 */}
         <div className="px-4 py-3 bg-gradient-to-r from-slate-800 via-slate-750 to-slate-800 border-t border-slate-700 shadow-lg">
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate('/devices')}
+              className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-mono uppercase tracking-wider flex items-center gap-3 transition-all shadow-lg hover:shadow-indigo-500/50 hover:scale-105 border border-indigo-500"
+            >
+              <List size={20} strokeWidth={2.5} />
+              <span className="font-bold">设备列表</span>
+            </button>
             <button
               onClick={() => setShowUploadModal(true)}
               className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-mono uppercase tracking-wider flex items-center gap-3 transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 border border-blue-500"
