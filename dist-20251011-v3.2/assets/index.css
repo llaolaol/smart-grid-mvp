@@ -23,3 +23,9 @@
 .header-card {
   display: none !important;
 }
+
+/* 隐藏思维导图管理页面的标题区域 */
+.page-header[data-v-e2852162],
+.page-header {
+  display: none !important;
+}
