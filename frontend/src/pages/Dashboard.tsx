@@ -487,7 +487,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center">
         <Title level={3} style={{ margin: 0, color: '#e2e8f0' }}>
           <DashboardOutlined className="mr-2" />
-          设备概览仪表盘
+          设备概览
         </Title>
         <Space size="middle">
           <Tooltip title="手动刷新数据">

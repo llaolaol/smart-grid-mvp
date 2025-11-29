@@ -62,10 +62,10 @@ export const menuConfig: MenuItem[] = [
       },
       {
         key: 'dashboard',
-        label: '场景仪表盘',
+        label: '设备概览',
         icon: BarChart2,
         path: '/dashboard',
-        description: '场景概览与统计',
+        description: '设备概览与统计',
       },
     ],
   },

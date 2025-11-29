@@ -52,7 +52,7 @@ const TopBar = ({ onUploadClick, onSettingsClick }: TopBarProps) => {
             500kV 智能变电站监控系统
           </h1>
           <p className="text-xs text-slate-400 font-mono">
-            SCADA v3.2.1 | 某某变电站 | 在线监测
+            SCADA v3.2.1 | 在线监测
           </p>
         </div>
 

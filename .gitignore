@@ -112,6 +112,9 @@ data/*.xlsx
 data/raw/
 data/processed/
 
+# Upload files
+api/uploads/
+
 # Model files
 *.pkl
 *.h5
