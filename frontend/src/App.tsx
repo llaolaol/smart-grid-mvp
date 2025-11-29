@@ -11,6 +11,7 @@ import Simulation from './pages/Simulation';
 import AIAssistant from './pages/AIAssistant';
 import Comparison from './pages/Comparison';
 import PDFReportGenerator from './pages/PDFReportGenerator';
+import KnowledgeReasoning from './pages/KnowledgeReasoning';
 import Test from './pages/Test';
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           <Route path="simulation" element={<Simulation />} />
           <Route path="ai-assistant" element={<AIAssistant />} />
           <Route path="pdf-generator" element={<PDFReportGenerator />} />
+          {/* 知识推理系统 */}
+          <Route path="knowledge-reasoning" element={<KnowledgeReasoning />} />
         </Route>
       </Routes>
     </BrowserRouter>

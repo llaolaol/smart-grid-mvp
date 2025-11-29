@@ -1,0 +1,1 @@
+import{bm as o}from"./index.js";const m=o("documentList",{state:()=>({documents:[]}),actions:{addDocument(t){this.documents.push(t)},removeDocument(t){this.documents=this.documents.filter(e=>e.id!==t)}}});export{m as u};

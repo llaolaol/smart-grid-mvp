@@ -45,6 +45,22 @@ services:
       timeout: 10s
       retries: 3
 
+  knowledge-reasoning:
+    build:
+      context: .
+      dockerfile: Dockerfile.knowledge-reasoning
+    container_name: smart-grid-knowledge-reasoning
+    ports:
+      - "3001:80"
+    networks:
+      - smart-grid-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   # Redis (optional - for future use)
   # redis:
   #   image: redis:7-alpine

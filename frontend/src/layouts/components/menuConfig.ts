@@ -23,6 +23,7 @@ import {
   Settings,
   User,
   Info,
+  Brain,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -119,6 +120,13 @@ export const menuConfig: MenuItem[] = [
         description: '多设备对比分析',
       },
     ],
+  },
+  {
+    key: 'knowledge-reasoning',
+    label: '知识推理',
+    icon: Brain,
+    path: '/knowledge-reasoning',
+    description: '基于知识图谱的智能故障诊断与推理系统',
   },
   {
     key: 'report',
