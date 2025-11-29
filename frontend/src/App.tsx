@@ -36,8 +36,14 @@ function App() {
           <Route path="simulation" element={<Simulation />} />
           <Route path="ai-assistant" element={<AIAssistant />} />
           <Route path="pdf-generator" element={<PDFReportGenerator />} />
-          {/* 知识推理系统 */}
+          {/* 知识推理系统 - 支持子路由 */}
           <Route path="knowledge-reasoning" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/documents" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/mindmap" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/fault-tree" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/fault-tree-management" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/diagnosis" element={<KnowledgeReasoning />} />
+          <Route path="knowledge-reasoning/dashboard" element={<KnowledgeReasoning />} />
         </Route>
       </Routes>
     </BrowserRouter>
