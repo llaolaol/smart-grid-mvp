@@ -74,17 +74,26 @@ export const deviceAPI = {
 
   /**
    * 获取所有设备（跨场景）
+   * 注意：由于不同场景可能包含相同的设备ID，这里按device_id去重
    */
   getAllDevices: async () => {
     const scenarios = await apiClient.get<any, ScenarioInfo[]>('/devices/scenarios');
-    const allDevices: Device[] = [];
+    const deviceMap = new Map<string, Device>();
 
     for (const scenario of scenarios) {
       const response = await apiClient.get<any, DeviceListResponse>(`/devices/scenarios/${scenario.scenario_id}`);
-      allDevices.push(...response.devices);
+
+      // 按device_id去重，优先保留严重程度更高的设备状态
+      response.devices.forEach((device) => {
+        const existingDevice = deviceMap.get(device.device_id);
+
+        if (!existingDevice || device.severity > existingDevice.severity) {
+          deviceMap.set(device.device_id, device);
+        }
+      });
     }
 
-    return allDevices;
+    return Array.from(deviceMap.values());
   },
 
   /**
@@ -390,6 +399,48 @@ export const historyAPI = {
   },
 };
 
+/**
+ * 数据上传API
+ */
+export const dataAPI = {
+  /**
+   * 上传数据
+   */
+  uploadData: async (formData: FormData) => {
+    const response = await axios.post('/api/v1/data/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  /**
+   * 获取上传记录列表
+   */
+  getUploadRecords: (params?: {
+    data_type?: string;
+    device_id?: string;
+    limit?: number;
+  }) => {
+    return apiClient.get<any, {
+      success: boolean;
+      total: number;
+      records: any[];
+    }>('/data/uploads', { params });
+  },
+
+  /**
+   * 获取单个上传记录详情
+   */
+  getUploadRecord: (uploadId: string) => {
+    return apiClient.get<any, {
+      success: boolean;
+      data: any;
+    }>(`/data/uploads/${uploadId}`);
+  },
+};
+
 export default {
   device: deviceAPI,
   diagnosis: diagnosisAPI,
@@ -397,4 +448,5 @@ export default {
   report: reportAPI,
   ai: aiAPI,
   history: historyAPI,
+  data: dataAPI,
 };

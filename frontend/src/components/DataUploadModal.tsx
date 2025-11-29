@@ -13,7 +13,7 @@ import {
   AlertCircle,
   CheckCircle
 } from 'lucide-react';
-import { deviceAPI } from '@/services/api';
+import { deviceAPI, dataAPI } from '@/services/api';
 import type { Device } from '@/types';
 import { formatFaultType } from '@/utils/format';
 
@@ -146,28 +146,40 @@ const DataUploadModal: React.FC<DataUploadModalProps> = ({ isOpen, onClose }) =>
     setIsSubmitting(true);
 
     try {
-      // 模拟上传
-      const formData = {
-        dataType,
-        deviceId,
-        operator,
-        testDate,
-        testItems: testItems.filter(item => item.parameter && item.value),
-        remarks
-      };
+      // 准备表单数据
+      const formData = new FormData();
+      formData.append('data_type', dataType);
+      formData.append('device_id', deviceId);
+      formData.append('operator', operator);
+      formData.append('test_datetime', testDate);
+      formData.append('remarks', remarks || '');
 
-      console.log('提交数据:', formData);
+      // 添加测试数据
+      const validTestItems = testItems.filter(item => item.parameter && item.value);
+      formData.append('test_data', JSON.stringify(validTestItems));
 
-      // 模拟API调用
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // 添加文件
+      uploadFiles.forEach(uploadFile => {
+        formData.append('files', uploadFile.file);
+      });
 
-      // 成功后关闭
-      onClose();
+      // 调用API上传
+      const response = await dataAPI.uploadData(formData);
 
-      // 重置表单
-      resetForm();
-    } catch (error) {
+      if (response.success) {
+        alert(`数据上传成功！\n上传ID: ${response.upload_id}`);
+
+        // 成功后关闭
+        onClose();
+
+        // 重置表单
+        resetForm();
+      } else {
+        alert('上传失败：' + (response.message || '未知错误'));
+      }
+    } catch (error: any) {
       console.error('上传失败:', error);
+      alert('上传失败：' + (error.message || '网络错误'));
     } finally {
       setIsSubmitting(false);
     }
