@@ -7,15 +7,17 @@ import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Brain } from 'lucide-react';
 
-// Vue应用路由映射
+// Vue应用路由映射（知识推理系统 - port 3001）
 const ROUTE_MAP: Record<string, string> = {
   'documents': '/documents',
   'mindmap': '/fault-tree-management',
   'fault-tree': '/fault-tree',
   'fault-tree-management': '/fault-tree-generation',
   'diagnosis': '/diagnosis',
-  'dashboard': '/operation-dashboard',
 };
+
+// Dashboard 应用路由映射（运行数据可视化系统 - port 3002）
+const DASHBOARD_ROUTE = 'dashboard';
 
 const KnowledgeReasoning = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,11 +28,13 @@ const KnowledgeReasoning = () => {
   const pathParts = location.pathname.split('/');
   const subRoute = pathParts[pathParts.length - 1];
 
-  // 获取对应的Vue路由，如果没有匹配则默认显示首页
-  const vueRoute = subRoute && ROUTE_MAP[subRoute] ? ROUTE_MAP[subRoute] : '/';
+  // 判断是否是 dashboard 路由（使用单独的端口）
+  const isDashboard = subRoute === DASHBOARD_ROUTE;
 
-  // iframe URL - 指向knowledge-reasoning服务的对应路由
-  const iframeUrl = `http://localhost:3001${vueRoute}`;
+  // 获取 iframe URL
+  const iframeUrl = isDashboard
+    ? 'http://localhost:3002'  // Dashboard 应用（前端数据可视化系统）
+    : `http://localhost:3001${ROUTE_MAP[subRoute] || '/'}`; // Vue 知识推理系统
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,7 +46,7 @@ const KnowledgeReasoning = () => {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [vueRoute]); // 当路由改变时重新加载
+  }, [iframeUrl]); // 当路由改变时重新加载
 
   const handleIframeLoad = () => {
     setIsLoading(false);
@@ -71,11 +75,11 @@ const KnowledgeReasoning = () => {
   const getPageDescription = () => {
     const descriptions: Record<string, string> = {
       'documents': '上传、管理和查看故障树文档',
-      'mindmap': '基于知识图谱的智能故障诊断与推理',
+      'mindmap': '管理和维护系统中的所有故障树模型',
       'fault-tree': '基于知识图谱的智能故障诊断与推理',
       'fault-tree-management': '基于知识图谱的智能故障诊断与推理',
       'diagnosis': '基于知识图谱的智能故障诊断与推理',
-      'dashboard': '基于知识图谱的智能故障诊断与推理',
+      'dashboard': '变压器运行数据多维度可视化分析与异常检测',
     };
     return descriptions[subRoute] || '基于知识图谱的智能故障诊断与推理';
   };
@@ -126,9 +130,9 @@ const KnowledgeReasoning = () => {
           </div>
         )}
 
-        {/* iframe 嵌入 Vue 应用 */}
+        {/* iframe 嵌入应用（Vue 知识推理系统 或 Dashboard 可视化系统） */}
         <iframe
-          key={vueRoute} // 使用key强制重新渲染iframe
+          key={iframeUrl} // 使用key强制重新渲染iframe
           src={iframeUrl}
           title={`知识推理系统 - ${getPageTitle()}`}
           className="w-full h-full border-0"
@@ -143,7 +147,11 @@ const KnowledgeReasoning = () => {
 
       {/* 底部提示 */}
       <div className="mt-2 text-xs text-slate-500 font-mono text-center">
-        系统运行于独立容器 | 端口 3001 | 当前路由: {vueRoute}
+        {isDashboard ? (
+          <>系统运行于独立容器 | Dashboard 端口 3002 | 运行数据可视化分析系统</>
+        ) : (
+          <>系统运行于独立容器 | Vue 端口 3001 | 知识推理系统</>
+        )}
       </div>
     </div>
   );

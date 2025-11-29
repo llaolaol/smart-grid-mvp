@@ -1,0 +1,146 @@
+{
+    "anomalies": [
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 425.3MW",
+            "severity": "medium",
+            "time": "2025-06-01 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 425.2594135802458
+        },
+        {
+            "description": "\u6cb9\u4f4d\u5f02\u5e38: 411.3",
+            "severity": "medium",
+            "time": "2025-06-03 00:00:00",
+            "type": "\u6cb9\u4f4d\u5f02\u5e38",
+            "value": 411.3333333333333
+        },
+        {
+            "description": "\u6cb9\u4f4d\u5f02\u5e38: 410.9",
+            "severity": "medium",
+            "time": "2025-06-04 00:00:00",
+            "type": "\u6cb9\u4f4d\u5f02\u5e38",
+            "value": 410.94166666666666
+        },
+        {
+            "description": "\u6cb9\u6e29\u5f02\u5e38: 55.4\u2103",
+            "severity": "medium",
+            "time": "2025-06-08 00:00:00",
+            "type": "\u6cb9\u6e29\u5f02\u5e38",
+            "value": 55.4375
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 425.3MW",
+            "severity": "medium",
+            "time": "2025-06-10 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 425.30040123456763
+        },
+        {
+            "description": "\u6cb9\u6e29\u5f02\u5e38: 59.5\u2103",
+            "severity": "medium",
+            "time": "2025-06-12 00:00:00",
+            "type": "\u6cb9\u6e29\u5f02\u5e38",
+            "value": 59.4513888888889
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 425.3MW",
+            "severity": "medium",
+            "time": "2025-06-19 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 425.2661111111129
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 424.7MW",
+            "severity": "medium",
+            "time": "2025-07-04 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 424.70716049383003
+        },
+        {
+            "description": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38: 71.0\u2103",
+            "severity": "medium",
+            "time": "2025-07-14 00:00:00",
+            "type": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38",
+            "value": 70.96041666666666
+        },
+        {
+            "description": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38: 71.5\u2103",
+            "severity": "medium",
+            "time": "2025-07-15 00:00:00",
+            "type": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38",
+            "value": 71.4833333333333
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 424.7MW",
+            "severity": "medium",
+            "time": "2025-07-16 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 424.7350617283957
+        },
+        {
+            "description": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38: 74.7\u2103",
+            "severity": "medium",
+            "time": "2025-07-19 00:00:00",
+            "type": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38",
+            "value": 74.71041666666666
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 424.7MW",
+            "severity": "medium",
+            "time": "2025-07-23 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 424.6572299382709
+        },
+        {
+            "description": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38: 70.3\u2103",
+            "severity": "high",
+            "time": "2025-07-24 00:00:00",
+            "type": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38",
+            "value": 70.3173611111111
+        },
+        {
+            "description": "\u6cb9\u6e29\u5f02\u5e38: 54.9\u2103",
+            "severity": "medium",
+            "time": "2025-07-30 00:00:00",
+            "type": "\u6cb9\u6e29\u5f02\u5e38",
+            "value": 54.94861111111111
+        },
+        {
+            "description": "\u529f\u7387\u5f02\u5e38: 424.8MW",
+            "severity": "medium",
+            "time": "2025-08-24 00:00:00",
+            "type": "\u529f\u7387\u5f02\u5e38",
+            "value": 424.7551851851868
+        },
+        {
+            "description": "\u6cb9\u4f4d\u5f02\u5e38: 412.1",
+            "severity": "medium",
+            "time": "2025-08-28 00:00:00",
+            "type": "\u6cb9\u4f4d\u5f02\u5e38",
+            "value": 412.1166666666666
+        },
+        {
+            "description": "\u6cb9\u6e29\u5f02\u5e38: 55.4\u2103",
+            "severity": "medium",
+            "time": "2025-08-29 00:00:00",
+            "type": "\u6cb9\u6e29\u5f02\u5e38",
+            "value": 55.44561403508773
+        },
+        {
+            "description": "\u6cb9\u4f4d\u5f02\u5e38: 413.9",
+            "severity": "medium",
+            "time": "2025-08-29 00:00:00",
+            "type": "\u6cb9\u4f4d\u5f02\u5e38",
+            "value": 413.9333333333332
+        },
+        {
+            "description": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38: 70.7\u2103",
+            "severity": "high",
+            "time": "2025-08-29 00:00:00",
+            "type": "\u7ed5\u7ec4\u6e29\u5ea6\u5f02\u5e38",
+            "value": 70.73693693693694
+        }
+    ],
+    "high_severity_count": 2,
+    "total_count": 20
+}

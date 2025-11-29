@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer Operation Data Visualization and Analysis System</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="header"></div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="analysisMode">Analysis Mode</label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="analysisMode" value="single" checked onchange="toggleAnalysisMode()">
+                    <span>Single Time Analysis</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="analysisMode" value="comparison" onchange="toggleAnalysisMode()">
+                    <span>Period Comparison</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="deviceSelect">Device Selection</label>
+            <select id="deviceSelect">
+                <option value="">All Devices</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="timeGranularity">Time Granularity</label>
+            <select id="timeGranularity">
+                <option value="hour">Hour</option>
+                <option value="day" selected>Day</option>
+                <option value="week">Week</option>
+                <option value="month">Month</option>
+                <option value="quarter">Quarter</option>
+            </select>
+        </div>
+
+                <div id="singleTimeControls" class="control-group">
+            <label for="yearSelect">Year Selection</label>
+            <select id="yearSelect">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+        </div>
+
+                <div id="comparisonControls" class="control-group" style="display: none;">
+            <label>Comparison Mode</label>
+            <div class="comparison-info">
+                <span>The first column displays the current Single Time Analysis data. Click the "+" button on the right to add a comparison column.</span>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <button onclick="refreshData()" class="refresh-btn">Refresh Data</button>
+        </div>
+    </div>
+
+
+
+        <div id="singleAnalysisPanels" class="panels">
+                <div class="panel">
+            <div class="panel-header">
+                Operation Data
+                <div class="chart-type-switcher">
+                    <select id="operationChartType" class="chart-type-select">
+                        <option value="line">Line Chart</option>
+                        <option value="bar">Bar Chart</option>
+                        <option value="area">Area Chart</option>
+                        <option value="pie">Pie Chart</option>
+                    </select>
+                    <select id="operationDataMode" class="data-mode-select" style="display: none;">
+                        <option value="relative">Relative Change Rate</option>
+                        <option value="original">Original Data</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div id="operationChart" class="chart-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel">
+            <div class="panel-header">
+                Status Data
+                <div class="chart-type-switcher">
+                    <select id="statusChartType" class="chart-type-select">
+                        <option value="line">Line Chart</option>
+                        <option value="histogram">Histogram</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div id="statusChart" class="chart-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel">
+            <div class="panel-header">
+                Oil Chromatography Data
+                <div class="chart-type-switcher">
+                    <select id="chromatographyChartType" class="chart-type-select">
+                        <option value="line">Line Chart</option>
+                        <option value="bar">Bar Chart</option>
+                        <option value="area">Area Chart</option>
+                        <option value="pie">Pie Chart</option>
+                    </select>
+                    <select id="chromatographyDataMode" class="data-mode-select" style="display: none;">
+                        <option value="relative">Relative Change Rate</option>
+                        <option value="original">Original Data</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div id="chromatographyChart" class="chart-container">
+                    <div class="loading">No Data Available</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel">
+            <div class="panel-header">Weather and Environment Data</div>
+            <div class="panel-content">
+                <div id="weatherChart" class="chart-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel correlation-panel" style="grid-column: 1 / 2; grid-row: 3 / 5;">
+            <div class="panel-header">Correlation Analysis</div>
+            <div class="panel-content">
+                <div id="correlationMatrix" class="chart-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel" style="grid-column: 2 / 3; grid-row: 3 / 4;">
+            <div class="panel-header">
+                Time Series Prediction Analysis
+                <div class="prediction-controls">
+                    <label for="predictionTypeSelect">Prediction Type:</label>
+                    <select id="predictionTypeSelect" class="prediction-select">
+                        <option value="oil_temp">Oil Temperature Prediction</option>
+                        <option value="oil_level">Oil Level Prediction</option>
+                        <option value="winding_temp">Winding Temperature Prediction</option>
+                        <option value="power">Power Prediction</option>
+                        <option value="current">Current Prediction</option>
+                    </select>
+                    <label for="predictionPoints">Prediction Points:</label>
+                    <select id="predictionPoints" class="prediction-select">
+                        <option value="5">5 Points</option>
+                        <option value="10" selected>10 Points</option>
+                        <option value="15">15 Points</option>
+                        <option value="20">20 Points</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div id="predictionChart" class="chart-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                <div class="panel" style="grid-column: 2 / 3; grid-row: 4 / 5;">
+            <div class="panel-header">Anomaly Detection</div>
+            <div class="panel-content">
+                <div id="anomalyList" class="anomaly-container">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+                    </div>
+
+        <div id="comparisonAnalysisPanels" style="display: none;">
+        <div id="comparisonLayout" class="comparison-layout">
+                        <div class="comparison-column" id="currentDataColumn">
+                <div class="comparison-column-header">
+                    <div class="column-title">Current Data</div>
+                    <div class="time-range-selector">
+                        <div class="time-range-item">
+                            <label>Start Time:</label>
+                            <input type="datetime-local" id="currentStartTime" onchange="updateCurrentData()"
+                                value="2024-01-01T00:00:00" step="1">
+                        </div>
+                        <div class="time-range-item">
+                            <label>End Time:</label>
+                            <input type="datetime-local" id="currentEndTime" onchange="updateCurrentData()"
+                                value="2024-12-31T23:59:59" step="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-panels">
+                                        <div class="comparison-panel">
+                        <div class="panel-header">
+                            Operation Data
+                            <div class="chart-type-switcher">
+                                <select id="currentOperationChartType" class="chart-type-select">
+                                    <option value="line">Line Chart</option>
+                                    <option value="bar">Bar Chart</option>
+                                    <option value="area">Area Chart</option>
+                                    <option value="pie">Pie Chart</option>
+                                </select>
+                                <select id="currentOperationDataMode" class="data-mode-select" style="display: none;">
+                                    <option value="relative">Relative Change Rate</option>
+                                    <option value="original">Original Data</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentOperationChart">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel">
+                        <div class="panel-header">
+                            Status Data
+                            <div class="chart-type-switcher">
+                                <select id="currentStatusChartType" class="chart-type-select">
+                                    <option value="line">Line Chart</option>
+                                    <option value="histogram">Histogram</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentStatusChart">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel">
+                        <div class="panel-header">
+                            Oil Chromatography Data
+                            <div class="chart-type-switcher">
+                                <select id="currentChromatographyChartType" class="chart-type-select">
+                                    <option value="line">Line Chart</option>
+                                    <option value="bar">Bar Chart</option>
+                                    <option value="area">Area Chart</option>
+                                    <option value="pie">Pie Chart</option>
+                                </select>
+                                <select id="currentChromatographyDataMode" class="data-mode-select"
+                                    style="display: none;">
+                                    <option value="relative">Relative Change Rate</option>
+                                    <option value="original">Original Data</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentChromatographyChart">
+                                <div class="loading">No Data Available</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel">
+                        <div class="panel-header">Weather and Environment Data</div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentWeatherChart">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel correlation-panel">
+                        <div class="panel-header">Correlation Analysis</div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentCorrelationChart">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel prediction-panel">
+                        <div class="panel-header">Time Series Prediction Analysis</div>
+                        <div class="panel-content">
+                            <div class="chart-container" id="currentPredictionChart">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="comparison-panel anomaly-panel">
+                        <div class="panel-header">Anomaly Detection</div>
+                        <div class="panel-content">
+                            <div class="anomaly-container" id="currentAnomalyList">
+                                <div class="loading">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                                                        </div>
+            </div>
+
+                        <div class="add-column-btn" onclick="addComparisonColumn()">
+                <div class="add-btn-content">
+                    <span class="add-icon">+</span>
+                    <span class="add-text">Add Comparison Column</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="/static/utils.js"></script>
+
+</html>
