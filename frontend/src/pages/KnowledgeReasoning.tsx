@@ -67,6 +67,19 @@ const KnowledgeReasoning = () => {
     return titles[subRoute] || '知识推理系统';
   };
 
+  // 获取页面描述
+  const getPageDescription = () => {
+    const descriptions: Record<string, string> = {
+      'documents': '上传、管理和查看故障树文档',
+      'mindmap': '基于知识图谱的智能故障诊断与推理',
+      'fault-tree': '基于知识图谱的智能故障诊断与推理',
+      'fault-tree-management': '基于知识图谱的智能故障诊断与推理',
+      'diagnosis': '基于知识图谱的智能故障诊断与推理',
+      'dashboard': '基于知识图谱的智能故障诊断与推理',
+    };
+    return descriptions[subRoute] || '基于知识图谱的智能故障诊断与推理';
+  };
+
   return (
     <div className="h-full flex flex-col">
       {/* 页面标题 */}
@@ -79,7 +92,7 @@ const KnowledgeReasoning = () => {
             {getPageTitle()}
           </h2>
           <p className="text-xs text-slate-400 font-mono">
-            KNOWLEDGE REASONING - 基于知识图谱的智能故障诊断与推理
+            {getPageDescription()}
           </p>
         </div>
       </div>

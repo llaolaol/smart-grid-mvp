@@ -17,3 +17,9 @@
 .el-container {
   padding-left: 0 !important;
 }
+
+/* 隐藏文档管理页面的标题卡片 */
+.header-card[data-v-d16c4a31],
+.header-card {
+  display: none !important;
+}
